@@ -86,6 +86,9 @@ export const Game = () => {
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#passing-data-through-props) からです。
 
+コミットハッシュ ->
+[26f71a5](https://github.com/ekusiadadus/react-old-tutorial/commit/36f71a558795d0313636ea160b9b4086dbb7fee7)
+
 ここでは、`Board` コンポーネントから `Square` コンポーネントにデータを渡す方法が記載されています。
 
 ```tsx
@@ -95,19 +98,19 @@ export const Board = () => {
   return (
     <div>
       <div className="board-row">
-        <Square value={0} />
-        <Square value={1} />
-        <Square value={2} />
+        <Square value={"0"} />
+        <Square value={"1"} />
+        <Square value={"2"} />
       </div>
       <div className="board-row">
-        <Square value={3} />
-        <Square value={4} />
-        <Square value={5} />
+        <Square value={"3"} />
+        <Square value={"4"} />
+        <Square value={"5"} />
       </div>
       <div className="board-row">
-        <Square value={6} />
-        <Square value={7} />
-        <Square value={8} />
+        <Square value={"6"} />
+        <Square value={"7"} />
+        <Square value={"8"} />
       </div>
     </div>
   );
@@ -135,7 +138,7 @@ export const Square = ({ value }: { value: string }) => {
   return (
     <button
       className="square"
-      onClieck={() => {
+      onClick={() => {
         alert("click");
       }}
     >

@@ -1,5 +1,14 @@
-// ここの value は string か number かという議論はあります。
 export const Square = ({ value }: { value: string }) => {
-  return <button className="square">{value}</button>;
+  return (
+    <button
+      className="square"
+      onClick={() => {
+        alert("click");
+      }}
+    >
+      {value}
+    </button>
+  );
 };
+
 export default Square;
