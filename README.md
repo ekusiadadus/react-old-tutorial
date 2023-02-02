@@ -446,6 +446,7 @@ export const Game = () => {
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#showing-the-past-moves) からです。
 
 ここではさらにさらに鬼畜なことに、Game の state history を使って 着手履歴を表示するということをしています。
+とくに jumpTo() が実装されていないのが、このチュートリアルの鬼畜さです。
 
 ```tsx
 export const Game = () => {
@@ -458,12 +459,18 @@ export const Game = () => {
     const history2 = history.slice(0, history.length);
     const current = history2[history2.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares) === "X" || calculateWinner(squares) === "O") {
+      return;
+    }
+    if (squares[i] === "X" || squares[i] === "O") {
+      alert("This square is already taken");
       return;
     }
     squares[i] = xIsNext ? "X" : "O";
     setHistory(history2.concat([{ squares: squares }]));
   };
+
+  const jumpTo = (step: number) => {};
 
   const current = history[history.length - 1];
   const winner = calculateWinner(current.squares);
@@ -509,9 +516,15 @@ export const Game = () => {
     const history2 = history.slice(0, stepNumber + 1);
     const current = history2[history2.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+
+    if (calculateWinner(squares) === "X" || calculateWinner(squares) === "O") {
       return;
     }
+    if (squares[i] === "X" || squares[i] === "O") {
+      alert("This square is already taken");
+      return;
+    }
+
     squares[i] = xIsNext ? "X" : "O";
     setHistory(history2.concat([{ squares: squares }]));
     setStepNumber(history2.length);
