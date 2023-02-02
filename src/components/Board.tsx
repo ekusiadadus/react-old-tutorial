@@ -2,21 +2,21 @@ import { useState } from "react";
 import Square from "./Square";
 
 export const Board = () => {
-  // 本家はここで null が入っていますがstringだけの型にしたいので、0-8 までの数字を入れています。
   const [squares, setSquares] = useState<string[]>(
     [...Array(9)].map((_, i) => i.toString())
   );
+  const [xIsNext, setXIsNext] = useState<boolean>(true);
 
-  // ここで、setSquares を関数の中で呼び出すようにしている
-  // setSquares を直接子コンポーネントに渡すとき、TypeScript だと Dispatch 型みたいなので渡すことになる
   const handleClick = (i: number) => {
     const squares2 = squares.slice();
-    squares2[i] = "X";
+    squares2[i] = xIsNext ? "X" : "O";
     setSquares(squares2);
+    setXIsNext(!xIsNext);
   };
 
   return (
     <div>
+      <div className="status">Next player: {xIsNext ? "X" : "O"}</div>
       <div className="board-row">
         <Square value={squares[0]} onClick={() => handleClick(0)} />
         <Square value={squares[1]} onClick={() => handleClick(1)} />
@@ -35,4 +35,5 @@ export const Board = () => {
     </div>
   );
 };
+
 export default Board;
