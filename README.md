@@ -13,13 +13,26 @@ tags: ["React", "TypeScript"]
 # React の チュートリアルを TypeScript + 関数コンポーネント で書き直す
 
 どうも、[@ekusiadadus](https://twitter.com/ekusiadadus) です。
-最近、React の 新しい Beta チュートリアルが着々と進んでいるのを見て、旧チュートリアルを TypeScript で書き直してみようと思いました。
-実は、React を初めて学んだときにも TypeScript と関数コンポーネントで書き直した経験があるのですが、コードを見返したら大分間違えていました。
-今回は、その修正を含めて、React の チュートリアルを TypeScript + 関数コンポーネント で書き直してみました。
+
+今回は、React の公式チュートリアルを TypeScript + 関数コンポーネントで書き直してみました。
+React の旧チュートリアルは、本当の React 初心者にとってはかなり厳しいと思っています。
+
+今頃、クラスコンポーネントで実装しているフロントエンド開発現場なんて限られていると思います。
+新チュートリアルは、 関数コンポーネントで書き直している + もっと優しくなっています。
+
+(フロントエンドガチ勢でもなければ、React ガチ勢でもないです 🙇)
 
 **[旧 React のチュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)**
 
-**[新 React のチュートリアル](https://beta.reactjs.org/learn/tutorial-tic-tac-toe)**
+https://ja.reactjs.org/tutorial/tutorial.html
+
+**[新 React のチュートリアル(おすすめ)](https://beta.reactjs.org/learn/tutorial-tic-tac-toe)**
+
+https://beta.reactjs.org/learn/tutorial-tic-tac-toe
+
+一応、自分の作業リポジトリも載せておきます 🙇
+
+https://github.com/ekusiadadus/react-old-tutorial
 
 ## 旧チュートリアル
 
@@ -27,11 +40,10 @@ tags: ["React", "TypeScript"]
 
 ### 旧チュートリアルの『スターターコードの中身を確認する』の改修
 
-コミットハッシュ ->
-[d39368c](https://github.com/ekusiadadus/react-old-tutorial/commit/d39368c13a01bbf0f90a60c453e0bcffb480ce38)
-
 そもそも、初期状態で Class コンポーネントで書かれています。
 旧チュートリアルでいうと、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#inspecting-the-starter-code) からです。
+
+https://ja.reactjs.org/tutorial/tutorial.html#inspecting-the-starter-code
 
 ```tsx
 export const Square = () => {
@@ -86,10 +98,10 @@ export const Game = () => {
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#passing-data-through-props) からです。
 
-コミットハッシュ ->
-[26f71a5](https://github.com/ekusiadadus/react-old-tutorial/commit/36f71a558795d0313636ea160b9b4086dbb7fee7)
+https://ja.reactjs.org/tutorial/tutorial.html#passing-data-through-props
 
 ここでは、`Board` コンポーネントから `Square` コンポーネントにデータを渡す方法が記載されています。
+React 初心者で props という表現でちゃんと理解できる人はどのくらいなのだろうか...🤔
 
 ```tsx
 export const Board = () => {
@@ -127,6 +139,8 @@ export const Square = ({ value }: { value: string }) => {
 ### 旧チュートリアルの『インタラクティブなコンポーネントを作る』の改修
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#making-an-interactive-component) からです。
+
+https://ja.reactjs.org/tutorial/tutorial.html#making-an-interactive-component
 
 ここでは、Square コンポーネントがクリックされたときに文字列"X" を表示するようにしています。
 このことから、上の value props は string だと判断しています。(諸説あります)
@@ -172,6 +186,8 @@ export const Square = ({ value }: { value: string }) => {
 ### 旧チュートリアルの『state のリフトアップ』の改修
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#lifting-state-up) からです。
+
+https://ja.reactjs.org/tutorial/tutorial.html#lifting-state-up
 
 おそらく、React の初心者にとっては、ここが一番の鬼門になっていると思います。
 というのも、ここで、state を親コンポーネントに持たせるということをやっているからです。
@@ -232,6 +248,8 @@ const Square = ({ value, onClick }: { value: string; onClick: () => void }) => {
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#taking-turns) からです。
 この章では、手番の処理を実装しています。
 
+https://ja.reactjs.org/tutorial/tutorial.html#taking-turns
+
 ```tsx
 export const Board = () => {
   const [squares, setSquares] = useState<string[]>(
@@ -271,6 +289,11 @@ export const Board = () => {
 ### 旧チュートリアルの『ゲーム勝者の判定』の改修
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#declaring-a-winner) からです。
+
+https://ja.reactjs.org/tutorial/tutorial.html#declaring-a-winner
+
+ここで、勝者の判定を行う関数を実装しています。
+React 初心者にとっては、この関数と状態の管理ちゃんと分けて考えられているのかな？というのが気になります...🤔
 
 ```tsx
 export const calculateWinner = (squares: string[]) => {
@@ -339,6 +362,8 @@ export const Board = () => {
 ### 旧チュートリアルの『着手の履歴の保存』の改修
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#storing-a-history) からです。
+
+https://ja.reactjs.org/tutorial/tutorial.html#storing-a-history
 
 ここではさらに鬼畜なことに、Board で定義した state を Game に再びリフトアップするということをしています。
 おそらく、React ガチ初心者には鬼畜な所業でしょう。(自分が初心者のときは何やっているのかさっぱりだった)
@@ -445,6 +470,8 @@ export const Game = () => {
 
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#showing-the-past-moves) からです。
 
+https://ja.reactjs.org/tutorial/tutorial.html#showing-the-past-moves
+
 ここではさらにさらに鬼畜なことに、Game の state history を使って 着手履歴を表示するということをしています。
 とくに jumpTo() が実装されていないのが、このチュートリアルの鬼畜さです。
 
@@ -502,7 +529,12 @@ export const Game = () => {
 
 ### 旧チュートリアルの『タイムトラベルの実装』の改修
 
-次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#implementing-time-travel) からです。
+一応公式チュートリアルの最後で、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#implementing-time-travel) からです。
+
+https://ja.reactjs.org/tutorial/tutorial.html#implementing-time-travel
+
+ここで、jumpTo() を実装して stepNumber も入れます。
+ここまでたどり着ける React 初心者は一体何人いるのでしょうか..🤔
 
 ```tsx
 export const Game = () => {
@@ -563,3 +595,15 @@ export const Game = () => {
   );
 };
 ```
+
+## 最後に
+
+今回は、React の公式チュートリアルを TypeScript + 関数コンポーネントで書き直してみました。
+React の旧チュートリアルは、本当の React 初心者にとってはかなり厳しいと思っています。
+
+さらに、今頃 class コンポーネントで実装しているフロントエンド開発現場なんて限られていると思います。
+React の新チュートリアルは、React の公式チュートリアルを 関数コンポーネントで書き直している + もっと優しくなっています。
+[こちら](https://beta.reactjs.org/learn/tutorial-tic-tac-toe) から見れます。
+
+https://beta.reactjs.org/learn/tutorial-tic-tac-toe
+
