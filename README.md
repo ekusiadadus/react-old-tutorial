@@ -273,7 +273,7 @@ export const Board = () => {
 次に、[ここ](https://ja.reactjs.org/tutorial/tutorial.html#declaring-a-winner) からです。
 
 ```tsx
-export const calculateWinner(squares: string[]) {
+export const calculateWinner = (squares: string[]) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -291,8 +291,7 @@ export const calculateWinner(squares: string[]) {
     }
   }
   return null;
-}
-
+};
 ```
 
 ```tsx
