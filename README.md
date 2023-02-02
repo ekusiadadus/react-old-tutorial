@@ -295,7 +295,6 @@ export const calculateWinner = (squares: string[]) => {
 ```
 
 ```tsx
-
 export const Board = () => {
   const [squares, setSquares] = useState<string[]>(
     [...Array(9)].map((_, i) => i.toString())
@@ -310,7 +309,9 @@ export const Board = () => {
   };
 
   const winner = calculateWinner(squares);
-  const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? "X" : "O"}`;
+  const status = winner
+    ? `Winner: ${winner}`
+    : `Next player: ${xIsNext ? "X" : "O"}`;
 
   return (
     <div>
@@ -330,6 +331,7 @@ export const Board = () => {
         <Square value={squares[7]} onClick={() => handlerClick(7)} />
         <Square value={squares[8]} onClick={() => handlerClick(8)} />
       </div>
+    </div>
   );
 };
 ```
@@ -407,11 +409,16 @@ export const Game = () => {
     const history2 = history.slice(0, history.length);
     const current = history2[history2.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares) === "X" || calculateWinner(squares) === "O") {
+      return;
+    }
+    if (squares[i] === "X" || squares[i] === "O") {
+      alert("This square is already taken");
       return;
     }
     squares[i] = xIsNext ? "X" : "O";
     setHistory(history2.concat([{ squares: squares }]));
+    setXIsNext(!xIsNext);
   };
 
   const current = history[history.length - 1];
