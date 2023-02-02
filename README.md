@@ -159,7 +159,7 @@ export const Square = ({ value }: { value: string }) => {
   return (
     <button
       className="square"
-      onClieck={() => {
+      onClick={() => {
         setValue2("X");
       }}
     >
